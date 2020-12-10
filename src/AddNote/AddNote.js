@@ -14,6 +14,7 @@ export default class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    this.validateFolderSelect();
     const newNote = {
       name: e.target['note-name'].value,
       content: e.target['note-content'].value,
@@ -40,13 +41,14 @@ export default class AddNote extends Component {
         console.error({ error })
       })
   }
+ 
 
   render() {
     const { folders=[] } = this.context
     return (
       <section className='AddNote'>
         <h2>Create a note</h2>
-        <NotefulForm onSubmit={this.handleSubmit}>
+        <NotefulForm className='AddNote' onSubmit={this.handleSubmit}>
           <div className='field'>
             <label htmlFor='note-name-input'>
               Name
@@ -72,8 +74,8 @@ export default class AddNote extends Component {
             <label htmlFor='note-folder-select'>
               Folder
             </label>
-            <select id='note-folder-select' name='note-folder-id'>
-              <option value={null}>...</option>
+            <select id='note-folder-select' name='note-folder-id' required>
+              <option value=''>...</option>
               {folders.map(folder =>
                 <option key={folder.id} value={folder.id}>
                   {folder.name}
@@ -91,3 +93,4 @@ export default class AddNote extends Component {
     )
   }
 }
+

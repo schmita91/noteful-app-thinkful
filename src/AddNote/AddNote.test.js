@@ -20,7 +20,7 @@ describe(`AddNote component`, () => {
   ]
 
   it('renders the complete form', () => {
-    const wrapper = shallow(<AddNote />)
+    const wrapper = shallow(<AddNote className='AddNote'/>)
     expect(toJson(wrapper)).toMatchSnapshot()
   })
 
