@@ -14,7 +14,6 @@ export default class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.validateFolderSelect();
     const newNote = {
       name: e.target['note-name'].value,
       content: e.target['note-content'].value,
