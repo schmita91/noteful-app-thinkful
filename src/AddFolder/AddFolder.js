@@ -1,64 +1,71 @@
-import React, { Component } from 'react'
-import NotefulForm from '../NotefulForm/NotefulForm'
-import ApiContext from '../ApiContext'
-import config from '../config'
+import React, { Component } from 'react';
+import ApiContext from '../ApiContext';
+import config from '../config';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import './AddFolder.css'
 
 export default class AddFolder extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   static defaultProps = {
     history: {
-      push: () => { }
+      goBack: () => {},
     },
-  }
+  };
+
   static contextType = ApiContext;
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const folder = {
-      name: e.target['folder-name'].value
-    }
-    fetch(`${config.API_ENDPOINT}/folders`, {
+  handleChange(e) {
+    this.setState({ value: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const target = e.target,
+      name = target.folderName.value,
+      myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    const raw = JSON.stringify({ folder_name: name });
+
+    const requestOptions = {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(folder),
-    })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(`${config.API_ENDPOINT}/folders`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        this.context.addFolder(result);
+        this.props.history.goBack();
       })
-      .then(folder => {
-        this.context.addFolder(folder)
-        this.props.history.push(`/folder/${folder.id}`)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
+      .catch((error) => console.log('error', error));
   }
 
   render() {
     return (
       <ErrorBoundary>
-        <section className='AddFolder'>
-          <h2>Create a folder</h2>
-          <NotefulForm onSubmit={this.handleSubmit}>
-            <div className='field'>
-              <label htmlFor='folder-name-input'>
-                Name
-              </label>
-              <input type='text' id='folder-name-input' name='folder-name' required/>
-            </div>
-            <div className='buttons'>
-              <button type='submit'>
-                Add folder
-              </button>
-            </div>
-          </NotefulForm>
-        </section>
-      </ErrorBoundary> 
-    )
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            New Folder:{' '}
+            <input
+              type="text"
+              name="folderName"
+              id="folderName"
+              onChange={this.handleChange}
+              placeholder="ex: Awesome folder"
+              required
+            />{' '}
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </ErrorBoundary>
+    );
   }
 }
