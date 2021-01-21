@@ -8,7 +8,7 @@ import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
-import config from '../config';
+import { apiEndpoint }from '../config';
 import './App.css';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
@@ -20,9 +20,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      console.log(`${config.API_ENDPOINT}`),
-      fetch(`${config.API_ENDPOINT}/folders`),
+      fetch(`${apiEndpoint.API_ENDPOINT}/notes`),
+      fetch(`${apiEndpoint.API_ENDPOINT}/folders`),
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok) return notesRes.json().then((e) => Promise.reject(e));

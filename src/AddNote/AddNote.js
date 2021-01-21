@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ApiContext from '../ApiContext';
-import config from '../config';
+import { apiEndpoint } from '../config';
 
 export default class AddNote extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class AddNote extends Component {
       redirect: 'follow',
     };
 
-    fetch(`${config.API_ENDPOINT}/notes`, requestOptions)
+    fetch(`${apiEndpoint.API_ENDPOINT}/notes`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         this.context.addNote(result);

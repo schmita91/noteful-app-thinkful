@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
-import config from '../config';
+import { apiEndpoint } from '../config';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 export default class AddFolder extends Component {
@@ -39,7 +39,7 @@ export default class AddFolder extends Component {
       redirect: 'follow',
     };
 
-    fetch(`${config.API_ENDPOINT}/folders`, requestOptions)
+    fetch(`${apiEndpoint.API_ENDPOINT}/folders`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         this.context.addFolder(result);

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 import ApiContext from '../ApiContext';
-import config from '../config';
+import { apiEndpoint } from '../config';
 import './Note.css';
 
 export default class Note extends React.Component {
@@ -18,7 +18,7 @@ export default class Note extends React.Component {
     e.preventDefault();
     const noteId = this.props.id;
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${apiEndpoint.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -29,7 +29,6 @@ export default class Note extends React.Component {
       })
       .then(() => {
         this.context.deleteNote(noteId);
-        // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId);
       })
       .catch((error) => {
@@ -64,5 +63,4 @@ export default class Note extends React.Component {
 Note.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  // modified: PropTypes.string.isRequired
 };

@@ -1,4 +1,7 @@
 
-export default {
-  API_ENDPOINT: process.env.API_ENDPOINT,
+
+const apiEndpoint = {
+  API_ENDPOINT: process.env.API_ENDPOINT
 }
+
+export { apiEndpoint };
