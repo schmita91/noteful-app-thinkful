@@ -21,6 +21,7 @@ class App extends Component {
   componentDidMount() {
     Promise.all([
       fetch(`${config.API_ENDPOINT}/notes`),
+      console.log(`${config.API_ENDPOINT}`),
       fetch(`${config.API_ENDPOINT}/folders`),
     ])
       .then(([notesRes, foldersRes]) => {
