@@ -1,7 +1,7 @@
 
 
 const apiEndpoint = {
-  API_ENDPOINT: process.env.API_ENDPOINT
+  API_ENDPOINT: `https://protected-ridge-89535.herokuapp.com/`
 }
 
 export { apiEndpoint };
