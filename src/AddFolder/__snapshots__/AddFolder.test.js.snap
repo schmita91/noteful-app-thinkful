@@ -1,27 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddItemForm component renders the complete form 1`] = `
-<ErrorBoundary>
-  <form
+<section
+  className="AddFolder"
+>
+  <h2>
+    Create a folder
+  </h2>
+  <NotefulForm
     onSubmit={[Function]}
   >
-    <label>
-      New Folder:
-       
+    <div
+      className="field"
+    >
+      <label
+        htmlFor="folder-name-input"
+      >
+        Name
+      </label>
       <input
-        id="folderName"
-        name="folderName"
+        id="folder-name-input"
+        name="folder"
         onChange={[Function]}
-        placeholder="ex: Awesome folder"
-        required={true}
         type="text"
       />
-       
-    </label>
-    <input
-      type="submit"
-      value="Submit"
-    />
-  </form>
-</ErrorBoundary>
+      <div>
+        <p />
+      </div>
+    </div>
+    <div
+      className="buttons"
+    >
+      <button
+        type="submit"
+      >
+        Add folder
+      </button>
+    </div>
+  </NotefulForm>
+</section>
 `;

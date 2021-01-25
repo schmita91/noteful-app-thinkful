@@ -1,7 +1,11 @@
-.AddNote {
-  color: #dedede;
+.add-note-form {
+  display: flex;
+  align-items: space-around;
+  flex-direction: column;
+  padding: 30px 30px;
+  width: 100%;
 }
-
-.AddNote h2 {
-  margin-left: 16px;
+#note-content-input {
+  height: 100px;
+  width: 100%;
 }

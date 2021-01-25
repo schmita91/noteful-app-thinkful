@@ -1,11 +1,20 @@
-import React from 'react';
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import AddFolder from './AddFolder'
 
-describe(`AddItemForm component`, () => {
-  it('renders the complete form', () => {
-    const wrapper = shallow(<AddFolder />)
-    expect(toJson(wrapper)).toMatchSnapshot()
-  })
+
+const state = {
+    error: null
+};
+const folderName = 'name';
+
+describe('component addfolder',()=>{
+it('renders to UI as expected', ()=>{
+    const tree = renderer.create(
+        <AddFolder state={state} folderName={folderName}/>
+    ).toJSON()
+    expect(tree).toMatchSnapshot();
+
+})
 })

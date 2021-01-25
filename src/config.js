@@ -1,7 +1,3 @@
-
-
-const apiEndpoint = {
-  API_ENDPOINT: `https://protected-ridge-89535.herokuapp.com/`
+export default {
+  API_ENDPOINT: `https://localhost:8000`,
 }
-
-export { apiEndpoint };

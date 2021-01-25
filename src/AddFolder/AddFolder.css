@@ -1,7 +1,13 @@
-.AddFolder {
-  color: #dedede;
+#folder-name {
+  display: flex;
+  justify-content: center;
+  min-width: 300px;
 }
-
-.AddFolder h2 {
-  margin-left: 16px;
+.add-new-folder {
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+}
+.cancel {
+  
 }
