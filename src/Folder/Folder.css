@@ -2,7 +2,7 @@
     border-radius: 5px;
     width: 60px;
     display: block;
-    background-color: #0B99D3;
+    background-color: #096488;
     border: 1px solid #0B99D3;
     color: #F0F7FA;
     margin-left: 10px;
@@ -17,6 +17,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 10px;
+    background-color: #064c68;
 }
 
 /* FOLDER HIGHLIGHTER */

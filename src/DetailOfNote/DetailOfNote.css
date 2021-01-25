@@ -1,13 +1,21 @@
 
-.note-header{
+.note-header {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 1px solid black;
     padding: 20px 20px;
-  
+    background-color: #05455e;
+    color: white;
 }
-.note-content>p {
-    max-width: 500px;
+.note-content {
+    margin: 10px;
+    padding: 20px 20px;
+    background-color: #05455e;
+    color: white;
 }
+/* fix paragraph leaking out div */
+.note-content {
+    word-wrap: break-word;
+  }

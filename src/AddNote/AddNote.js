@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import NotefulContext from '../NotefulContext';
-import ValidationError from '../ValidationError/ValidationError';
 import {v4 as uuidv4} from 'uuid';
 import './AddNote.css';
 import NoteError from '../NoteError/NoteError';
@@ -58,6 +57,7 @@ class AddNote extends Component {
         const folder = this.folder.current.value;
         const content = this.noteContent.current.value;
         this.addNote(note, folder, content);
+        console.log(note, folder, content);
     }
     validateNote = () => {
         const note = this.state.note.value.trim();
@@ -124,7 +124,7 @@ class AddNote extends Component {
                     defaultValue="Note Name" 
                     onChange={e=>this.updateNoteName(e.target.value)}>
                     </input>
-                    {this.state.note.touched && (<ValidationError message={noteError}/>)}
+
                 <label htmlFor="selectFolder" id="selectFolder">Folder:</label>
                     <select name="selectFolder" 
                     id="selectFolder" 
@@ -139,7 +139,7 @@ class AddNote extends Component {
                         }
                         )}
                     </select>
-                    {this.state.folder.touched && (<ValidationError message={folderError}/>)}
+                  
                 
                     <label htmlFor="note-content" id="note-content">Notes:</label>
                     <textarea type="text" 
@@ -149,12 +149,8 @@ class AddNote extends Component {
                     defaultValue="Enter notes here..." 
                     onChange={e=>this.updateContent(e.target.value)}>
                     </textarea>
-                    {this.state.content.touched && (<ValidationError message={noteContentError}/>)}
-                <button type="submit" id="submit" disabled = {
-                    this.validateNote() ||
-                    this.validateFolder() ||
-                    this.validateContent()
-                }>Submit</button>
+                    
+                <button type="submit" id="submit" >Submit</button>
             </form>
             </NoteError>
         )

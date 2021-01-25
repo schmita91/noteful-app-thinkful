@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`folder component renders to UI as expected 1`] = `
+<a
+  aria-current={null}
+  href="/link"
+  onClick={[Function]}
+>
+  <li
+    className="folder"
+  >
+    <button
+      className="delete-folder"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+  </li>
+</a>
+`;
