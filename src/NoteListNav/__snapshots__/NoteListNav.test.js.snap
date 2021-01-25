@@ -10,7 +10,7 @@ exports[`NoteListNav component renders a .NoteListNav by default 1`] = `
   <div
     className="NoteListNav__button-wrapper"
   >
-    <NavCircleButton
+    <CircleButton
       className="NoteListNav__add-folder-button"
       tag={
         Object {
@@ -49,7 +49,7 @@ exports[`NoteListNav component renders a .NoteListNav by default 1`] = `
       />
       <br />
       Folder
-    </NavCircleButton>
+    </CircleButton>
   </div>
 </div>
 `;

@@ -13,6 +13,3 @@ export default function NotefulForm(props) {
   );
 }
 
-NotefulForm.propTypes = {
-  className: PropTypes.string.isRequired,
-};

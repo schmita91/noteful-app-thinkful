@@ -35,8 +35,7 @@ exports[`Note component renders a .Note by default 1`] = `
       title=""
       transform={null}
     />
-     
-    remove
+     remove
   </button>
   <div
     className="Note__dates"
@@ -93,8 +92,7 @@ exports[`Note component renders the Note given props 1`] = `
       title=""
       transform={null}
     />
-     
-    remove
+     remove
   </button>
   <div
     className="Note__dates"
@@ -107,7 +105,7 @@ exports[`Note component renders the Note given props 1`] = `
       <span
         className="Date"
       >
-        2nd Jan 2019
+        15th Jan 2019
       </span>
     </div>
   </div>
