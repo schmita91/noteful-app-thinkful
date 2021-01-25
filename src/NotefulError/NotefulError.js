@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-export default class ErrorBoundary extends Component {
+class NotefulError extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hasError: false,
-    };
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error) {
@@ -14,8 +12,10 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <h2>Something went wrong</h2>;
+      return <h2>Sorry. There was an error.</h2>;
     }
     return this.props.children;
   }
 }
+
+export default NotefulError;

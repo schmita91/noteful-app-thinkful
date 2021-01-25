@@ -1,30 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Note from '../Note/Note';
-import ApiContext from '../ApiContext';
 import { findNote } from '../notes-helpers';
 import './NotePageMain.css';
+import NoteContext from '../NoteContext';
+import PropTypes from 'prop-types';
 
-export default class NotePageMain extends React.Component {
-  static defaultProps = {
-    match: {
-      params: {},
-    },
-  };
-  static contextType = ApiContext;
-
-  handleDeleteNote = (noteId) => {
-    this.props.history.push(`/`);
-  };
-
+export default class NotePageMain extends Component {
+  static contextType = NoteContext;
   render() {
-    const { notes = [] } = this.context;
     const { noteId } = this.props.match.params;
-    const note = findNote(notes, Number(noteId)) || { content: '' };
-
+    const note = findNote(this.context.notes, noteId);
     return (
-      <section className="NotePageMain">
-        <Note id={note.id} name={note.note_name} modified={note.date_created} />
-        <div className="NotePageMain__content">
+      <section className='NotePageMain'>
+        <Note
+          id={note.id}
+          name={note.name}
+          modified={note.modified}
+          handleDelete={this.context.handleDelete}
+        />
+        <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) => (
             <p key={i}>{para}</p>
           ))}
@@ -33,3 +27,13 @@ export default class NotePageMain extends React.Component {
     );
   }
 }
+
+NotePageMain.defaultProps = {
+  note: {
+    content: ''
+  }
+};
+
+NotePageMain.propTypes = {
+  noteId: PropTypes.string
+};

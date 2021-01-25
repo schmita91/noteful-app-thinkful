@@ -20,14 +20,12 @@ describe(`AddNote component`, () => {
   ]
 
   it('renders the complete form', () => {
-    const wrapper = shallow(<AddNote className='AddNote'/>)
+    const wrapper = shallow(<AddNote />)
     expect(toJson(wrapper)).toMatchSnapshot()
   })
 
-  // enzyme doesn't support React.createContext
-  it.skip('renders the select options from folders', () => {
-    const context = { folders: stubFolders }
-    const select = shallow(<AddNote />, context)
+  it('renders the select options from folders', () => {
+    const select = shallow(<AddNote folders={stubFolders} />)
       .find('#note-folder-select')
     expect(toJson(select)).toMatchSnapshot()
   })

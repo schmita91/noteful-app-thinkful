@@ -1,71 +1,106 @@
 import React, { Component } from 'react';
-import ApiContext from '../ApiContext';
-import { apiEndpoint } from '../config';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import NotefulForm from '../NotefulForm/NotefulForm';
+import './AddFolder.css';
+import NoteContext from '../NoteContext';
 
 export default class AddFolder extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      error: null,
+      name: '',
+      nameValid: false,
+      validationMessage: ''
+    };
   }
+  static contextType = NoteContext;
 
-  static defaultProps = {
-    history: {
-      goBack: () => {},
-    },
+  isNameValid = event => {
+    event.preventDefault();
+    if (!this.state.name) {
+      this.setState({
+        validationMessage: 'Folder name can not be blank.',
+        nameValid: false
+      });
+    } else {
+      this.setState(
+        {
+          validationMessage: '',
+          nameValid: true
+        },
+        this.handleAddFolder()
+      );
+    }
   };
 
-  static contextType = ApiContext;
-
-  handleChange(e) {
-    this.setState({ value: e.target.value });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const target = e.target,
-      name = target.folderName.value,
-      myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-
-    const raw = JSON.stringify({ folder_name: name });
-
-    const requestOptions = {
+  handleAddFolder = () => {
+    const options = {
       method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(`${apiEndpoint.API_ENDPOINT}/folders`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        this.context.addFolder(result);
-        this.props.history.goBack();
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        // id: cuid(),
+        name: this.state.name
       })
-      .catch((error) => console.log('error', error));
-  }
+    };
+    console.log(options);
+
+    fetch('http://localhost:9090/folders', options)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong');
+        }
+        return res;
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.context.handleAddFolder(data);
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        });
+      });
+  };
+
+  nameChange = letter => {
+    this.setState({ name: letter });
+  };
 
   render() {
     return (
-      <ErrorBoundary>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            New Folder:{' '}
+      <section className='AddFolder'>
+        <h2>Create a folder</h2>
+        <NotefulForm
+          onSubmit={event => {
+            this.isNameValid(event);
+          }}
+        >
+          <div className='field'>
+            <label htmlFor='folder-name-input'>Name</label>
             <input
-              type="text"
-              name="folderName"
-              id="folderName"
-              onChange={this.handleChange}
-              placeholder="ex: Awesome folder"
-              required
-            />{' '}
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </ErrorBoundary>
+              type='text'
+              id='folder-name-input'
+              name='folder'
+              onChange={event => this.nameChange(event.target.value)}
+            />
+            {!this.state.nameValid && (
+              <div>
+                <p>{this.state.validationMessage}</p>
+              </div>
+            )}
+          </div>
+          <div className='buttons'>
+            <button type='submit'>Add folder</button>
+          </div>
+        </NotefulForm>
+        {this.state.error && (
+          <div>
+            <p>{this.state.error}</p>
+          </div>
+        )}
+      </section>
     );
   }
 }
