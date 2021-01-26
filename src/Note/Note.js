@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import NoteError from '../NoteError/NoteError';
 import PropTypes from 'prop-types'
-import config from '../config'
+import { API_ENDPOINT } from '../config'
 
 
 class Note extends Component {
@@ -12,7 +12,7 @@ class Note extends Component {
         error: null
     }
     handleDelete(id, callback){
-        fetch(`${config.API_ENDPOINT}/api/notes/${id}`, {
+        fetch(`${API_ENDPOINT}/api/notes/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

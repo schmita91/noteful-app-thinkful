@@ -11,11 +11,11 @@ import FolderOfNotes from './FolderOfNotes/FolderOfNotes';
 import DetailOfNote from './DetailOfNote/DetailOfNote';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
-import config from './config'
+import { API_ENDPOINT } from './config'
 
 
-const folderUrl=`${config.API_ENDPOINT}/api/folders`;
-const notesUrl=`${config.API_ENDPOINT}/api/notes`;
+const folderUrl=`${API_ENDPOINT}/api/folders`;
+const notesUrl=`${API_ENDPOINT}/api/notes`;
 
 class App extends Component {
 
