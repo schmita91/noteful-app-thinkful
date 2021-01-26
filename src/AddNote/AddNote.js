@@ -3,7 +3,7 @@ import NotefulContext from '../NotefulContext';
 import {v4 as uuidv4} from 'uuid';
 import './AddNote.css';
 import NoteError from '../NoteError/NoteError';
-import config from '../config'
+import { API_ENDPOINT } from '../config'
 
 class AddNote extends Component {
     static contextType= NotefulContext;
@@ -86,7 +86,7 @@ class AddNote extends Component {
             folderid: folder,
             content: content
         }
-        fetch(`${config.API_ENDPOINT}/api/notes`,{
+        fetch(`${API_ENDPOINT}/api/notes`,{
             method: 'POST',
             body: JSON.stringify(newNote),
             headers: {
