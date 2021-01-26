@@ -3,13 +3,13 @@ import './Folder.css'
 import {NavLink} from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
-import config from '../config'
+import { API_ENDPOINT } from '../config'
 
 
 class Folder extends Component {
     static contextType = NotefulContext;
     handleDeleteFolder(id, cb, routerProps){
-        fetch( `${config.API_ENDPOINT}/api/folders/${id}`, {
+        fetch( `${API_ENDPOINT}/api/folders/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
