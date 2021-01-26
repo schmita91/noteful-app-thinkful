@@ -5,7 +5,7 @@ import Folder from './Folder'
 import NotefulContext from '../NotefulContext';
 import {BrowserRouter} from 'react-router-dom'
 
-describe('folder component', ()=> {
+describe.skip('folder component', ()=> {
   
 const routerp =  {"folderid": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
 "name": "Important"}
@@ -30,7 +30,7 @@ it('renders to UI as expected', ()=> {
 const tree = renderer.create(
   <BrowserRouter>
 <NotefulContext.Provider value={{folders}}>
-    <Folder routerProps={routerp} folderid="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1" link='link' />
+    <Folder routerProps={routerp} folderid="b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1" Link='link' />
 </NotefulContext.Provider>
 </BrowserRouter>)
 .toJSON()

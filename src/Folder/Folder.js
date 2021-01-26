@@ -57,6 +57,5 @@ class Folder extends Component {
 Folder.propTypes = {
     folderid: PropTypes.number.isRequired,
     link: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
   };
 export default Folder;
