@@ -110,9 +110,6 @@ class AddNote extends Component {
 
     }
     render(){
-        const noteError = this.validateNote();
-        const folderError = this.validateFolder();
-        const noteContentError = this.validateContent();
         return(
             <NoteError>
             <form className="add-note-form" onSubmit={this.handleSubmit}>
